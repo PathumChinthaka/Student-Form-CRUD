@@ -67,51 +67,9 @@
     <script src="Lib\jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-    <script>
-
-    const sendData=function(){
-            // add validation
-        function validate(){
-
-            var name = new RegExp('^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$');
-            var address = new RegExp('^([a-zA-Z\u0080-\u024F]+(?:. |-| |\'))*[a-zA-Z\u0080-\u024F]*$');
-            var email = new RegExp('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$');
-            return !(name.test($('#name').val())) ? false : !address.test($('#city').val()) ? false : !email.test($('#email').val()) ? false : true;
-        }
-
-        let obj=JSON.stringify({
-            name:$('#name').val(),
-            city:$('#city').val(),
-            email:$('#email').val(),
-            level:$('#level').val()
-        });
-
-        let setUrl={
-            
-            url: "http://localhost:8080/student",
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            data: ob
-        }
-
-        $.ajax(setUrl).done((a)=>{
-            console.log('success');
-        }).fail((a,b,c)=>{
-            console.log(a,b,c);
-        })
-        
-    }
-        $('#Add-btn').click(function(){
-            if(validate()){
-                setUrl();
-            }    
-        })
-
-        
-
+        crossorigin="anonymous">
     </script>
+    <script src="Model\Student.js" type="module"></script>
+    <script src="Script\index.js" type="module"></script>
 </body>
 </html>

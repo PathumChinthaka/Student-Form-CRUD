@@ -39,12 +39,12 @@ export class StudentController {
     console.log(studentObj);
 
     $.ajax({
-      url: "http://localhost:8080/student/api/hi",
-      type: "GET",
-      data: "",
-      dataType: "",
+      url: "http://localhost:8080/student/api/save",
+      type: "POST",
+      data:studentObj,
+      dataType: "json",
       headers: {
-          // "Content-Type": "application/json"
+          "Content-Type": "application/json"
       },
       success: (response) => {
           console.log(response);

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class StudentServiceImpl implements StudentService {
@@ -24,5 +26,10 @@ public class StudentServiceImpl implements StudentService {
         Student student=converter.getStudentEntity(studentDTO);
         studentRepository.save(student);
         return studentDTO;
+    }
+
+    @Override
+    public List<Student> getAllData() {
+        return studentRepository.findAll();
     }
 }

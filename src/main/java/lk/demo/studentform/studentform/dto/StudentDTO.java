@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @Data
 public class StudentDTO {
-    private String sId;
+    private String sid;
     private String name;
     private String city;
     private String email;

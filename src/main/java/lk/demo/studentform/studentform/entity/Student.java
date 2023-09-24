@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Student")
 public class Student implements SuperEntity {
     @Id
-    private String sId;
+    private String sid;
     private String name;
     private String city;
     private String email;

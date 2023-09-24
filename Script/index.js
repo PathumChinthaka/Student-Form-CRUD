@@ -19,10 +19,10 @@ export class StudentController {
     return !name.test($("#name").val())
       ? false
       : !address.test($("#city").val())
-      ? false
-      : !email.test($("#email").val())
-      ? false
-      : true;
+        ? false
+        : !email.test($("#email").val())
+          ? false
+          : true;
   }
 
   saveStudent() {
@@ -42,18 +42,56 @@ export class StudentController {
     $.ajax({
       url: "http://localhost:8082/student/api/save",
       type: "POST",
-      data:studentObj,
+      data: studentObj,
       dataType: "json",
       headers: {
-          "Content-Type": "application/json"
+        "Content-Type": "application/json"
       },
       success: (response) => {
-          console.log(response);
+        console.log("hellow");
+        this.getStudentData();
       },
       error: (message) => {
-          console.log(message);
+        console.log(message);
       }
-  });
+    });
+  }
+
+  getStudentData() {
+
+    $.ajax({
+      url: "http://localhost:8082/student/api/get",
+      type: "GET",
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      success: (response) => {
+        console.log(response);
+        this.loadStudentData(response);
+      },
+      error: (message) => {
+        console.log(message);
+      }
+    });
+
+  }
+
+  loadStudentData(dataArray) {
+
+    $('#student-tbl #student_Tbody tr td').remove();
+
+    dataArray.map((value) => {
+      let row = "<tr>" +
+        "<td>" + value.sid + "</td>" +
+        "<td>" + value.name + "</td>" +
+        "<td>" + value.city + "</td>" +
+        "<td>" + value.email + "</td>" +
+        "<td>" + value.level + "</td>" +
+        "</tr>";
+
+      $('#student-tbl #student_Tbody').append(row);
+    });
   }
 }
 

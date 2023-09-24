@@ -7,7 +7,7 @@ export class StudentController {
       this.saveStudent();
       this.clearInputFields();
     });
-
+    this.getSelectedRow();
     this.getStudentData();
   }
 
@@ -97,7 +97,17 @@ export class StudentController {
     });
   }
 
-  clearInputFields(){
+  getSelectedRow() {
+    $('#student_Tbody').on('click', 'tr', (event) => {
+      $('#sid').val($(event.target).closest('tr').find('td').eq(0).text());
+      $('#name').val($(event.target).closest('tr').find('td').eq(1).text());
+      $('#city').val($(event.target).closest('tr').find('td').eq(2).text());
+      $('#email').val($(event.target).closest('tr').find('td').eq(3).text());
+      $('#level').val($(event.target).closest('tr').find('td').eq(4).text());
+    });
+  }
+
+  clearInputFields() {
     $("#sid").val("");
     $("#name").val("");
     $("#city").val("");

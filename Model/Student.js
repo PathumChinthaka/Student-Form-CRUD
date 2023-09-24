@@ -1,5 +1,6 @@
 export class Student{
-  constructor(name,city,email,level){
+  constructor(sid,name,city,email,level){
+    this.sid=sid;
     this.name=name;
     this.city=city;
     this.email=email;

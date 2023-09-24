@@ -29,6 +29,7 @@ export class StudentController {
 
     const studentObj = JSON.stringify(
       new Student(
+        $("#sid").val(),
         $("#name").val(),
         $("#city").val(),
         $("#email").val(),
@@ -39,7 +40,7 @@ export class StudentController {
     console.log(studentObj);
 
     $.ajax({
-      url: "http://localhost:8080/student/api/save",
+      url: "http://localhost:8082/student/api/save",
       type: "POST",
       data:studentObj,
       dataType: "json",

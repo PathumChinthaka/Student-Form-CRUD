@@ -5,7 +5,10 @@ export class StudentController {
   constructor() {
     $('#Add-btn').on('click', () => {
       this.saveStudent();
+      this.clearInputFields();
     });
+
+    this.getStudentData();
   }
 
   dataValidation() {
@@ -92,6 +95,14 @@ export class StudentController {
 
       $('#student-tbl #student_Tbody').append(row);
     });
+  }
+
+  clearInputFields(){
+    $("#sid").val("");
+    $("#name").val("");
+    $("#city").val("");
+    $("#email").val("");
+    $("#level").val("");
   }
 }
 

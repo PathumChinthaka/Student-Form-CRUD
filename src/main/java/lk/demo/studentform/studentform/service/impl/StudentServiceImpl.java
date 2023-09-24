@@ -1,6 +1,7 @@
 package lk.demo.studentform.studentform.service.impl;
 
 import lk.demo.studentform.studentform.dto.StudentDTO;
+import lk.demo.studentform.studentform.entity.Student;
 import lk.demo.studentform.studentform.persistence.StudentRepository;
 import lk.demo.studentform.studentform.service.StudentService;
 import lk.demo.studentform.studentform.util.Converter;
@@ -20,6 +21,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO saveStudent(StudentDTO studentDTO) {
-        return null;
+        Student student=converter.getStudentEntity(studentDTO);
+        studentRepository.save(student);
+        return studentDTO;
     }
 }

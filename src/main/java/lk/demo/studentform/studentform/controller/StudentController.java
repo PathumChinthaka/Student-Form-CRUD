@@ -17,6 +17,7 @@ public class StudentController {
         if(studentObj==null){
             System.out.println("Student Object is null");
         }else {
+            System.out.println(studentObj);
             studentService.saveStudent(studentObj);
         }
         return studentObj;
@@ -26,7 +27,6 @@ public class StudentController {
     public String getStudentData(){
         System.out.println("mama awaa");
         return "Mama awa ban";
-
     }
 
 }

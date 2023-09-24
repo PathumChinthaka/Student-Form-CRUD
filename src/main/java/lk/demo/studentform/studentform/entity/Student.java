@@ -1,15 +1,13 @@
-package lk.demo.studentform.studentform.dto;
+package lk.demo.studentform.studentform.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class StudentDTO {
-    private String sId;
+public class Student {
     private String name;
     private String city;
     private String email;

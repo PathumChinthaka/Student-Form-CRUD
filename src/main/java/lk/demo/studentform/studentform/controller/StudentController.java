@@ -4,7 +4,10 @@ import lk.demo.studentform.studentform.dto.StudentDTO;
 import lk.demo.studentform.studentform.entity.Student;
 import lk.demo.studentform.studentform.persistence.StudentRepository;
 import lk.demo.studentform.studentform.service.StudentService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,6 +35,12 @@ public class StudentController {
     @GetMapping("/get")
     public List<Student> getStudentData(){
         return studentService.getAllData();
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void updateStudent(@RequestBody StudentDTO studentDTO){
+        studentService.updateData(studentDTO);
     }
 
 }

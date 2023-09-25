@@ -7,8 +7,13 @@ export class StudentController {
       this.saveStudent();
       this.clearInputFields();
     });
-    this.getSelectedRow();
-    this.getStudentData();
+    $('#update-btn').on('click', () => {
+      this.updateStudent();
+      this.getStudentData();
+      this.clearInputFields();
+    });
+      this.getSelectedRow();
+      this.getStudentData();
   }
 
   dataValidation() {
@@ -28,9 +33,8 @@ export class StudentController {
           : true;
   }
 
-  saveStudent() {
-
-    const studentObj = JSON.stringify(
+  studentObject() {
+    const student = JSON.stringify(
       new Student(
         $("#sid").val(),
         $("#name").val(),
@@ -39,8 +43,14 @@ export class StudentController {
         $("#level").val()
       )
     );
+    return student;
+  }
 
-    console.log(studentObj);
+  saveStudent() {
+
+    let studentObj = this.studentObject();
+
+    console.log(myObj);
 
     $.ajax({
       url: "http://localhost:8082/student/api/save",
@@ -78,6 +88,27 @@ export class StudentController {
       }
     });
 
+  }
+
+  updateStudent() {
+
+    let studentObj = this.studentObject();
+
+    $.ajax({
+      url: "http://localhost:8082/student/api/update",
+      type: "PUT",
+      data: studentObj,
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      success: (response) => {
+        console.log(response);
+      },
+      error: (message) => {
+        console.log(message);
+      }
+    });
   }
 
   loadStudentData(dataArray) {

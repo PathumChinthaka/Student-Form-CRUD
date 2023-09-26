@@ -43,4 +43,13 @@ public class StudentServiceImpl implements StudentService {
            System.out.println("not ok");
        }
     }
+
+    @Override
+    public void deleteData(StudentDTO studentDTO) {
+        if (studentRepository.existsById(studentDTO.getSid())){
+            studentRepository.delete(converter.getStudentEntity(studentDTO));
+        }else {
+            System.out.println("Not deleted");
+        }
+    }
 }

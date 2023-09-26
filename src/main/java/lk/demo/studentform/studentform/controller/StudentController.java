@@ -43,4 +43,9 @@ public class StudentController {
         studentService.updateData(studentDTO);
     }
 
+    @DeleteMapping("/delete")
+    public void deleteStudent(@RequestBody StudentDTO studentDTO){
+        studentService.deleteData(studentDTO);
+    }
+
 }

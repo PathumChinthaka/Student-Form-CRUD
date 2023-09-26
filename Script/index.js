@@ -9,20 +9,19 @@ export class StudentController {
     });
     $('#update-btn').on('click', () => {
       this.updateStudent();
-      this.getStudentData();
       this.clearInputFields();
     });
 
     $('#delete-btn').on('click', () => {
       this.deleteStudent();
       this.clearInputFields();
-      this.getStudentData();
     });
-      this.getSelectedRow();
-      this.getStudentData();
+    this.getSelectedRow();
+    this.getStudentData();
   }
 
   dataValidation() {
+    var sid = new RegExp("/^(S)[0-9]{1,3}$/")
     var name = new RegExp("^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$");
     var address = new RegExp(
       "^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$"
@@ -30,13 +29,15 @@ export class StudentController {
     var email = new RegExp(
       "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$"
     );
-    return !name.test($("#name").val())
+    return !sid.test($("#sid").val())
       ? false
-      : !address.test($("#city").val())
+      : !name.test($("#name").val())
         ? false
-        : !email.test($("#email").val())
+        : !address.test($("#city").val())
           ? false
-          : true;
+          : !email.test($("#email").val())
+            ? false
+            : true;
   }
 
   studentObject() {
@@ -55,8 +56,6 @@ export class StudentController {
   saveStudent() {
 
     let studentObj = this.studentObject();
-
-    console.log(myObj);
 
     $.ajax({
       url: "http://localhost:8082/student/api/save",
@@ -109,7 +108,7 @@ export class StudentController {
         "Content-Type": "application/json"
       },
       success: (response) => {
-        console.log(response);
+        response.code === 200 ? this.getStudentData() : console.log('not ok');
       },
       error: (message) => {
         console.log(message);
@@ -118,9 +117,9 @@ export class StudentController {
   }
 
 
-  deleteStudent(){
-    
-      let studentObj = this.studentObject();
+  deleteStudent() {
+
+    let studentObj = this.studentObject();
 
     $.ajax({
       url: "http://localhost:8082/student/api/delete",
@@ -131,7 +130,8 @@ export class StudentController {
         "Content-Type": "application/json"
       },
       success: (response) => {
-        console.log(response);
+        confirm('delete this data ?');
+        response.code === 200 ? this.getStudentData() : console.log('not ok');
       },
       error: (message) => {
         console.log(message);

@@ -16,6 +16,10 @@ export class StudentController {
       this.deleteStudent();
       this.clearInputFields();
     });
+
+    $('#search-btn').on('click', () => {
+      this.searchStudent();
+    });
     this.getSelectedRow();
     this.getStudentData();
   }
@@ -109,6 +113,24 @@ export class StudentController {
       },
       success: (response) => {
         response.code === 200 ? this.getStudentData() : console.log('not ok');
+      },
+      error: (message) => {
+        console.log(message);
+      }
+    });
+  }
+
+  searchStudent(){
+    const sid= $("#search").val();
+    $.ajax({
+      url: "http://localhost:8082/student/api/"+sid,
+      type: "GET",
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      success: (response) => {
+        response.code === 200 ? this.loadStudentData(response) : console.log('not ok');
       },
       error: (message) => {
         console.log(message);

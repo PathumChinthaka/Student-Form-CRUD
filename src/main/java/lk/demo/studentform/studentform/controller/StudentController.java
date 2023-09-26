@@ -4,6 +4,7 @@ import lk.demo.studentform.studentform.dto.StudentDTO;
 import lk.demo.studentform.studentform.entity.Student;
 import lk.demo.studentform.studentform.persistence.StudentRepository;
 import lk.demo.studentform.studentform.service.StudentService;
+import lk.demo.studentform.studentform.util.ResponseUtil;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,13 +40,15 @@ public class StudentController {
 
     @PutMapping("/update")
     @ResponseStatus(value = HttpStatus.OK)
-    public void updateStudent(@RequestBody StudentDTO studentDTO){
+    public ResponseUtil updateStudent(@RequestBody StudentDTO studentDTO){
         studentService.updateData(studentDTO);
+        return new ResponseUtil(200,"Student data updated");
     }
 
     @DeleteMapping("/delete")
-    public void deleteStudent(@RequestBody StudentDTO studentDTO){
+    public ResponseUtil deleteStudent(@RequestBody StudentDTO studentDTO){
         studentService.deleteData(studentDTO);
+        return new ResponseUtil(200,"Student data deleted");
     }
 
 }

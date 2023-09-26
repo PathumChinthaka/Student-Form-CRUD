@@ -12,6 +12,12 @@ export class StudentController {
       this.getStudentData();
       this.clearInputFields();
     });
+
+    $('#delete-btn').on('click', () => {
+      this.deleteStudent();
+      this.clearInputFields();
+      this.getStudentData();
+    });
       this.getSelectedRow();
       this.getStudentData();
   }
@@ -97,6 +103,28 @@ export class StudentController {
     $.ajax({
       url: "http://localhost:8082/student/api/update",
       type: "PUT",
+      data: studentObj,
+      dataType: "json",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      success: (response) => {
+        console.log(response);
+      },
+      error: (message) => {
+        console.log(message);
+      }
+    });
+  }
+
+
+  deleteStudent(){
+    
+      let studentObj = this.studentObject();
+
+    $.ajax({
+      url: "http://localhost:8082/student/api/delete",
+      type: "DELETE",
       data: studentObj,
       dataType: "json",
       headers: {

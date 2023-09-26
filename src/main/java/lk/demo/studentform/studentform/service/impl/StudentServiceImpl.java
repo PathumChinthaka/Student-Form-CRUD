@@ -6,7 +6,6 @@ import lk.demo.studentform.studentform.persistence.StudentRepository;
 import lk.demo.studentform.studentform.service.StudentService;
 import lk.demo.studentform.studentform.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,4 +51,13 @@ public class StudentServiceImpl implements StudentService {
             System.out.println("Not deleted");
         }
     }
+
+    @Override
+    public List<Student> findStudentData(String sid) {
+        List<Student> bySid = studentRepository.findBySid(sid);
+        System.out.println("mama find studnet");
+        return bySid;
+    }
+
+
 }

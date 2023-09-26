@@ -2,17 +2,15 @@ package lk.demo.studentform.studentform.controller;
 
 import lk.demo.studentform.studentform.dto.StudentDTO;
 import lk.demo.studentform.studentform.entity.Student;
-import lk.demo.studentform.studentform.persistence.StudentRepository;
+import lk.demo.studentform.studentform.exception.StudentNotFound;
 import lk.demo.studentform.studentform.service.StudentService;
 import lk.demo.studentform.studentform.util.ResponseUtil;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -49,6 +47,17 @@ public class StudentController {
     public ResponseUtil deleteStudent(@RequestBody StudentDTO studentDTO){
         studentService.deleteData(studentDTO);
         return new ResponseUtil(200,"Student data deleted");
+    }
+
+    @GetMapping("{sid}")
+    public List<Student> findStudentById(@PathVariable String sid){
+        List<Student> studentData = studentService.findStudentData(sid);
+        System.out.println(sid);
+        if(studentData==null){
+            System.out.println("Error nn");
+            throw new StudentNotFound("Student not found");
+        }
+        return studentData;
     }
 
 }

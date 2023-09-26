@@ -10,4 +10,5 @@ import java.util.List;
 public interface StudentRepository extends MongoRepository<Student,String> {
     Student save(Student student);
     List<Student> findAll();
+    List<Student>findBySid(String sid);
 }

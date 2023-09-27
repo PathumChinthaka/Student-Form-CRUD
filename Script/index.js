@@ -21,7 +21,7 @@ export class StudentController {
       this.searchStudent();
     });
     this.getSelectedRow();
-    this.getStudentData();
+    // this.getStudentData();
   }
 
   dataValidation() {
@@ -120,17 +120,25 @@ export class StudentController {
     });
   }
 
-  searchStudent(){
-    const sid= $("#search").val();
+  searchStudent() {
+    const sid = $("#search").val();
     $.ajax({
-      url: "http://localhost:8082/student/api/"+sid,
+      url: "http://localhost:8082/student/api/" + sid,
       type: "GET",
       dataType: "json",
       headers: {
         "Content-Type": "application/json"
       },
-      success: (response) => {
-        response.code === 200 ? this.loadStudentData(response) : console.log('not ok');
+      success: function (response) {
+        $('#student-tbl #student_Tbody tr td').remove();
+        let row = "<tr>" +
+          "<td>" + response.sid + "</td>" +
+          "<td>" + response.name + "</td>" +
+          "<td>" + response.city + "</td>" +
+          "<td>" + response.email + "</td>" +
+          "<td>" + response.level + "</td>" +
+          "</tr>";
+        $('#student-tbl #student_Tbody').append(row);
       },
       error: (message) => {
         console.log(message);
